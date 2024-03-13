@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Inversión DCA</title>
+</head>
+<body>
+    <h1>Calculadora de Inversión DCA en el S&P 500</h1>
+    <p>Basado en un histórico de sólo 2 años. Esto NO es ninguna recomendación de compra o inversión, sólo una práctica de desarrollo y CI/CD.</p>
+    <form method="post">
+        <label for="inversion_inicial">Inversión Inicial (en euros):</label>
+        <input type="number" id="inversion_inicial" name="inversion_inicial" min="150" max="20000" step="0.5" value="150" required><br>
+
+        <label for="contribucion_mensual">Contribución Mensual (en euros):</label>
+        <input type="number" id="contribucion_mensual" name="contribucion_mensual" min="150" max="2000" step="0.5" value="250" required><br>
+
+        <label for="periodo_inversion">Período de Inversión (en años):</label>
+        <input type="number" id="periodo_inversion" name="periodo_inversion" min="1" max="40" value="25" required><br>
+
+        <input type="submit" value="Calcular">
+    </form>
+</body>
+</html>
