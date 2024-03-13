@@ -1,0 +1,9 @@
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+
+# Ignore any build artifacts
+*.egg-info/
+
+# Ignore IDE settings
+.vscode/
