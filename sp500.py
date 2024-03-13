@@ -30,7 +30,7 @@ def calculate_result(initial: float, monthly: float, years: int) -> float:
 
     months = years * 12
 
-    print(f"[i] cost    total_shares")
+    print('[i] cost    total_shares')
     total = initial
     for i in range(1, months + 1):
         cost = hist.loc[i, 'Close']
@@ -53,4 +53,4 @@ def sp500() -> None:
     return render_template('form.html')
 
 if __name__ == '__main__':
-    app.run(port=80)
+    app.run(host='0.0.0.0', port=5000)

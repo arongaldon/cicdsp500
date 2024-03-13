@@ -13,8 +13,8 @@ COPY templates /app/templates
 RUN pip install --trusted-host pypi.python.org -r /requirements.txt
 RUN rm /requirements.txt
 
-# Make port 80 available outside the container
-EXPOSE 80
+# Make port 5000 available outside the container
+EXPOSE 5000
 
 # Run the sp500 app when the container launches
 WORKDIR /app
