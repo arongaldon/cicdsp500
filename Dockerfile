@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.10-slim
+FROM python:3.10-slim@sha256:8c4c32279ee7a58fb58b12c684bc0319e8382412d6d4a8680dc2122ee12cd45d
 
 # Set the working directory to /app
 WORKDIR /app
