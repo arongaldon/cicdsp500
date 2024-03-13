@@ -6,12 +6,12 @@ WORKDIR /app
 
 # Copy the current directory contents into the container at /app
 COPY sp500.py /app
-COPY requirements.txt /
+COPY requirements /app/requirements
 COPY templates /app/templates
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --trusted-host pypi.python.org -r /requirements.txt
-RUN rm /requirements.txt
+# Install any needed packages specified in requirements for production environment
+RUN pip install --trusted-host pypi.python.org -r /app/requirements/prod.txt
+RUN rm -rf /app/requirements
 
 # Make port 5000 available outside the container
 EXPOSE 5000
