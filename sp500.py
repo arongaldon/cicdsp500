@@ -26,6 +26,9 @@ def get_sp500_data() -> pd.DataFrame:
 def calculate_result(initial: float, monthly: float, years: int) -> float:
     """Calculate the result of DCA investment."""
     hist = get_sp500_data()
+    if hist.empty:
+        return 0.0
+
     hist.reset_index(drop=True, inplace=True)
 
     months = years * 12
