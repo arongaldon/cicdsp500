@@ -27,4 +27,6 @@ Aron Galdon Gines 2024
 
 5. Requirements splitted in two: one for testing and the other for production. So for deployment `prod.txt` will be used, and for development and testing stages `test.txt` will be the proper one to use running `pip install -r requirements/test.txt` in our `venv`.
 
-6. Added some unit tests in `test_sp500.py`
+6. Added some unit tests in `test_sp500.py`.
+
+7. Added a Makefile.
