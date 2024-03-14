@@ -29,3 +29,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/sp500:latest
+      -
+        name: Test
+        run: make setup-test && \
+             make test
