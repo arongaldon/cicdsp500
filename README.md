@@ -4,6 +4,8 @@ CI/CD example for a Python script that calculates an inversion on the S&amp;P 50
 
 Webapp to provide the user with the estimated quantity of euros given last 2 years of historical data and the DCA amounts to invest.
 
+Packages pushed to the docker registry [DockerHub arongaldongines/sp500](https://hub.docker.com/r/arongaldongines/sp500).
+
 **DISCLAIMER**:
 This is NOT a buy or investment recommendation, just a development and CI/CD practice.
 
