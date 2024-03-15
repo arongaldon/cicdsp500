@@ -39,28 +39,35 @@ class InvestmentCalculator:
         if hist.empty:
             return 0.0
 
-        hist.reset_index(drop=True, inplace=True)
+        # Calculate the average monthly return of the S&P 500
+        hist['Monthly_Return'] = hist['Close'].pct_change().fillna(0)
+        monthly_return_avg = hist['Monthly_Return'].mean()
 
-        months = self.years * 12
-
-        print('[i] cost    total_shares')
         total = self.initial
-        for i in range(1, months + 1):
-            cost = hist.loc[i, 'Close']
+        for _ in range(self.years * 12):
+            total *= (1 + monthly_return_avg)
             total += self.monthly
-            total_shares = total / cost
-            print(f"[{i}] {cost:.2f} {total_shares:.2f}")
 
-        print(f"Final cost per share: {cost:.2f}")
-        return total_shares * cost
+        return round(total, 2)
 
     def calculate_retained(self) -> float:
         """Calculate the total money retained by the government."""
-        return 1
+        ranges = [(6000, 0.19), (50000, 0.21), (float('inf'), 0.23)]
 
-    def calculate_net_profit(self) -> float:
-        """Calculate the total net profit after tax."""
-        return 2
+        retained = 0
+        profit = self.calculate_profit()
+        for limit, percentage in ranges:
+            if profit <= limit:
+                retained += profit * percentage
+            else:
+                retained += limit * percentage
+                profit -= limit
+
+        return retained
+
+    def calculate_profit(self) -> float:
+        """Calculate the total profit."""
+        return self.calculate_total() - self.calculate_contributed()
 
 app = Flask(__name__)
 
@@ -75,13 +82,13 @@ def sp500() -> None:
         contributed = calculator.calculate_contributed()
         total = calculator.calculate_total()
         retained = calculator.calculate_retained()
-        net_profit = calculator.calculate_net_profit()
+        net_profit = calculator.calculate_profit() - retained
         return render_template('results.html'
                                , years=years
-                               , contributed=f"{contributed:.2f} €"
-                               , total=f"{total:.2f} €"
-                               , retained=f"{retained:.2f} €"
-                               , net_profit=f"{net_profit:.2f} €")
+                               , contributed=f"{contributed:,.2f} €"
+                               , total=f"{total:,.2f} €"
+                               , retained=f"{retained:,.2f} €"
+                               , net_profit=f"{net_profit:,.2f} €")
     return render_template('form.html')
 
 if __name__ == '__main__':

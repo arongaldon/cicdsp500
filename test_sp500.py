@@ -7,7 +7,7 @@ from sp500 import InvestmentCalculator
 
 fake_hist = pd.DataFrame({ 'Date': [f'2023-{month:02d}-01' for month in range(1, 13)]
                            .append([f'2024-{month:02d}-01' for month in range(1, 13)])
-                         , 'Close': [float(x) for x in range(4000, 6400, 100)] })
+                         , 'Close': [float(x) for x in range(100, 340, 10)] })
 
 @pytest.fixture(name="get_sp500_data")
 def fixture_get_sp500_data(mocker):
@@ -37,8 +37,8 @@ def test_calculate_total(get_sp500_data) -> None:
     calculator = InvestmentCalculator(initial, monthly, years)
     result = calculator.calculate_total()
 
-    expected_shares = (initial + (monthly * 12)) / 4000.0
-    assert result == expected_shares * 4000.0
+    expected_shares = 26228.00
+    assert result == pytest.approx(expected_shares, 1e-5)
 
 def test_calculate_total_empty_data(get_sp500_data) -> None:
     """Test with empty data (no historical prices)"""
