@@ -10,7 +10,7 @@ just a development and CI/CD practice.
 
 Aron Galdon Gines 2024
 """
-
+ 
 from flask import Flask, render_template, request
 import pandas as pd
 import yfinance as yf
