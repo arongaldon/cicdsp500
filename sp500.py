@@ -50,24 +50,20 @@ class InvestmentCalculator:
 
         return round(total, 2)
 
-    def calculate_retained(self) -> float:
+    def calculate_retained(self, profit: float) -> float:
         """Calculate the total money retained by the government."""
-        ranges = [(6000, 0.19), (50000, 0.21), (float('inf'), 0.23)]
+        ranges = [(6000, 0.19), (50000, 0.21), (200000, 0.23), (300000, 0.27), (float('inf'), 0.28)]
 
-        retained = 0
-        profit = self.calculate_profit()
+        pending = profit
+        retained = 0.0
         for limit, percentage in ranges:
-            if profit <= limit:
-                retained += profit * percentage
-            else:
-                retained += limit * percentage
-                profit -= limit
+            if profit < limit:
+                retained += pending * percentage
+                break
+            retained += limit * percentage
+            pending -= limit
 
         return retained
-
-    def calculate_profit(self) -> float:
-        """Calculate the total profit."""
-        return self.calculate_total() - self.calculate_contributed()
 
 app = Flask(__name__)
 
@@ -81,8 +77,9 @@ def sp500() -> None:
         calculator = InvestmentCalculator(initial, monthly, years)
         contributed = calculator.calculate_contributed()
         total = calculator.calculate_total()
-        retained = calculator.calculate_retained()
-        net_profit = calculator.calculate_profit() - retained
+        profit = total - contributed
+        retained = calculator.calculate_retained(profit)
+        net_profit = profit - retained
         return render_template('results.html'
                                , years=years
                                , contributed=f"{contributed:,.2f} €"
