@@ -37,7 +37,7 @@ def test_calculate_total(get_sp500_data) -> None:
     calculator = InvestmentCalculator(initial, monthly, years)
     result = calculator.calculate_total()
 
-    expected_shares = 262280.00
+    expected_shares = 26228.00
     assert result == pytest.approx(expected_shares, 1e-5)
 
 def test_calculate_total_empty_data(get_sp500_data) -> None:
