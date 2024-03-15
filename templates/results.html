@@ -8,8 +8,13 @@
 
 <body>
     <h1>Resultado de la Inversión DCA en el S&P 500</h1>
-    <p>El valor estimado de su inversión DCA en el S&P 500 después de {{ periodo_inversion }} años es de aproximadamente
-        {{ valor_final }}.</p>
+    <ul>
+        <li>Años: {{ years }}</li>
+        <li>Total aportado: {{ contributed }}</li>
+        <li>Valor estimado: {{ total }}</li>
+        <li>Para Hacienda: {{ retained }}</li>
+        <li>Beneficio neto: {{ net_profit }}</li>
+    </ul>
 </body>
 
 </html>
